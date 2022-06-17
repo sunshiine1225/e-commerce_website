@@ -1,5 +1,5 @@
 import {React,useEffect,useReducer} from 'react'
-import {useParams} from "react-router-dom";
+import {useParams,useNavigate} from "react-router-dom";
 import axios from "axios"
 //import logger from "use-reducer-logger"
 import Col from "react-bootstrap/Col"
@@ -32,6 +32,7 @@ const  reducer =(state,action) =>
 };
 export  const Productscreen = () => {
     const params=useParams()
+    const navigate = useNavigate();
     const {slug}=params;
     const [{loading, error ,product},dispatch]=useReducer(reducer,{
       loading:true,error:'',product:[],
@@ -75,6 +76,7 @@ export  const Productscreen = () => {
         
         payload: { ...product, quantity },
       });
+      navigate("/cart")
     };
     return (
       
