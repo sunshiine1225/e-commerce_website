@@ -5,7 +5,7 @@ const data = {
             slug: 'nike1-slim-shirt',
             category:"shirts",
             image:"/images/p1.jpg",
-            countInstock: 120,
+            countInstock: 12,
             brand:"Nike",
             rating:4.5,
             numReviews:10,
