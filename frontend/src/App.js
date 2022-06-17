@@ -1,33 +1,61 @@
 
+import {Routes,BrowserRouter,Route,Link} from 'react-router-dom';
 import './App.css';
-import data from "./data";
+import HomeScreen from "./screens/Homescreen";
+import Productscreen from "./screens/Productscreen";
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Badge from 'react-bootstrap/Badge'
+import Container from 'react-bootstrap/Container'
+import {LinkContainer} from 'react-router-bootstrap'
+import { useContext } from 'react';
+import {Store} from "./store"
 function App() {
+  const {state} =useContext(Store);
+  const {cart } =state;
   return (
-    <div >
+  <BrowserRouter>
+    <div  className="d-flex flex-column site-container">
       <header >
-       <a href="/">
-         amazona
-       </a></header>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <LinkContainer to="/">
+            <Navbar.Brand>amazona</Navbar.Brand>
+            </LinkContainer>
+            <Nav className="me-auto">
+                <Link to="/cart" className="nav-link">
+                  Cart
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg="danger">
+                      {cart.cartItems.length}
+                    </Badge>
+                  )}
+                </Link>
+              </Nav>
+          </Container>
+        </Navbar>
+       </header>
+       
+       
        <main>
-         <h1>
-           Featured Products
-         </h1>
-         <div className="products">
-         {
-           data.products.map(product=>(<div className="product" key={product.slug}>
-             <a href={`/product/${product.slug}`}>
-            <img src={product.image} alt={product.name}/></a>
-            <div className="product-info">
-              <a href={`/product/${product.name}`}>
-                <p>{product.name}</p></a>
-             <p>${product.price}</p>
-             <button>Add to cart</button></div>
-           </div>))
-         }
-         </div>
-       </main>
-      
-    </div>
+         <Container className="mt-3">
+  
+         <Routes> 
+       <Route path='/product/:slug' element={<Productscreen/>}/>
+       <Route  path="/" element={<HomeScreen/>} />
+       </Routes>
+           
+         </Container>
+       
+         
+          
+         </main>
+         <footer>
+           <div  className="text-center">All Rights Reserved.</div>
+
+         </footer>
+         </div></BrowserRouter>
+        
   );
 }
 
