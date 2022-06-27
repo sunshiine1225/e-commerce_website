@@ -1,10 +1,21 @@
 import express from "express";
 //mport { useParams } from "react-router-dom";
 import data from "./data.js";
+import mongoose from "mongoose"
+import dotenv from "dotenv"
+dotenv.config();
+mongoose.connect(process.env.MONGODB_URI).then(()=>{
+  console.log("connected")
+})
+.catch((err)=>{
+  console.log(err.message)
+})
+
 const app=express();
 app.get('/api/products',(req,res)=>{res.send(data.products)
 
 })
+
 app.get('/api/product/slug/:slug',(req,res)=>{
     
     const product= data.products.find(x => x.slug === req.params.slug);
