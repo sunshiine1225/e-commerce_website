@@ -18,7 +18,6 @@ const navigate =useNavigate();
     cart: { cartItems },
   } = state;
   
-  
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
@@ -31,13 +30,16 @@ const navigate =useNavigate();
     });
   };
   const removeItemHandler = (item) => {
-    ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+    ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: {...item} });
   };
 
-  
   const checkoutHandler = () => {
     navigate('/signin?redirect=/shipping');
   };
+  
+
+  
+  
 
   return (
     <div>
@@ -79,7 +81,8 @@ const navigate =useNavigate();
                     </Col>
                     <Col md={3}>${item.price}</Col>
                     <Col md={2}>
-                      <Button variant="light" >
+                      <Button variant="light" 
+                      onClick={()=> removeItemHandler(item)}>
                         <i className="fas fa-trash"></i>
                       </Button>
                     </Col>
