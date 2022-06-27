@@ -61,7 +61,7 @@ export  const Productscreen = () => {
     const addToCartHandler =async  () => {
       
     const existItem = cart.cartItems.find((x) => x._id === product._id);
-    console.log({existItem});
+    
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
      

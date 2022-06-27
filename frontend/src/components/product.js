@@ -42,7 +42,7 @@ import { Store } from '../store';
            </Card.Text>
     
     
-    {product.countInStock === 0 ? (
+    {product.countInstock === 0 ? (
           <Button variant="light" disabled>
             Out of stock
           </Button>
