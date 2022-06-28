@@ -14,7 +14,7 @@ const data = {
 
         },
         {
-            name:"Nike slim shirt",
+            name:"Nike2 slim shirt",
             slug: 'nike1-slim-shirt',
             category:"pants",
             image:"/images/p2.jpg",
