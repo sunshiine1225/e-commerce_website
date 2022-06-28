@@ -1,12 +1,15 @@
 import express from 'express';
 import Product from '../models/productModel.js';
 import data from '../data.js';
+import User from '../models/userModel.js';
 const productRouter = express.Router();
 productRouter.get('/', async (req, res) => {
   await Product.remove({});
   const product = await Product.insertMany(data.products);
+  await User.remove({});
+  const createdUsers = await User.insertMany(data.users);
+  res.send({ product, createdUsers });
   
-  res.send(product);
 });
 productRouter.get('/', async (req, res) => {
   const products = await Product.find();
